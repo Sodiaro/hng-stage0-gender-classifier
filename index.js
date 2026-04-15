@@ -66,7 +66,12 @@ app.get("/api/classify", async (req, res) => {
 	}
 });
 
-// Start server
-app.listen(3000, () => {
-	console.log("Server running on port 3000");
-});
+// Start server only if run directly
+if (require.main === module) {
+	const PORT = process.env.PORT || 3000;
+	app.listen(PORT, () => {
+		console.log(`Server running on port ${PORT}`);
+	});
+}
+
+module.exports = app;
